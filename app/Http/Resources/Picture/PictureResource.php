@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Picture;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class PictureResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,8 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'image' => $this->getFirstMediaUrl('users_images'),
+            'title' => $this->title,
+            'content' => $this->getFirstMediaUrl('pictures_content'),
             'created_at' => $this->created_at,
             'updated_at' => $this->created_at,
         ];

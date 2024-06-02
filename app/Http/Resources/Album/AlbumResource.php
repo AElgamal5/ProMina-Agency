@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Album;
 
+use App\Http\Resources\Picture\PictureCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class AlbumResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +17,11 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'image' => $this->getFirstMediaUrl('users_images'),
+            'title' => $this->title,
+            'description' => $this->description,
             'created_at' => $this->created_at,
             'updated_at' => $this->created_at,
+            'pictures' => new PictureCollection($this->whenLoaded('pictures'))
         ];
     }
 }

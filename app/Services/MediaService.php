@@ -22,9 +22,9 @@ class MediaService
     private function collectionName(string $prefix, string $type, string|null $uniquer): string
     {
         if ($uniquer) {
-            return $prefix . $type . $uniquer;
+            return $prefix . '_' . $type . '_' . $uniquer;
         }
-        return $prefix . $type;
+        return $prefix . '_' . $type;
     }
 
     public function replaceMedia($media, Model $model, string $prefix, string $type, string $uniquer = null)
