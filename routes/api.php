@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,20 +15,35 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::group(['prefix' => 'users'], function () {
-    Route::get('/', [UserController::class, 'index']);
-    Route::post('/', [UserController::class, 'store']);
-    Route::get('/{id}', [UserController::class, 'show']);
-    Route::patch('/{id}', [UserController::class, 'update']);
-    Route::delete('/{id}', [UserController::class, 'destroy']);
+//public
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
-Route::group(['prefix' => 'albums'], function () {
-    Route::get('/', [AlbumController::class, 'index']);
-    Route::post('/', [AlbumController::class, 'store']);
-    Route::get('/{id}', [AlbumController::class, 'show']);
-    Route::patch('/{id}', [AlbumController::class, 'update']);
-    Route::delete('/{id}/withPictures', [AlbumController::class, 'destroyWithPictures']);
-    Route::delete('/{id}/movePictureTo/{anotherAlbumId}', [AlbumController::class, 'destroyAndMovePictures']);
+
+//protected
+Route::group(['middleware' => 'auth:sanctum'], function () {
+
+    Route::group(['prefix' => 'auth'], function () {
+        Route::get('/logout', [AuthController::class, 'logout']);
+    });
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::post('/', [UserController::class, 'store']);
+        Route::get('/{id}', [UserController::class, 'show']);
+        Route::patch('/{id}', [UserController::class, 'update']);
+        Route::delete('/{id}', [UserController::class, 'destroy']);
+    });
+
+    Route::group(['prefix' => 'albums'], function () {
+        Route::get('/', [AlbumController::class, 'index']);
+        Route::post('/', [AlbumController::class, 'store']);
+        Route::get('/{id}', [AlbumController::class, 'show']);
+        Route::patch('/{id}', [AlbumController::class, 'update']);
+        Route::delete('/{id}/withPictures', [AlbumController::class, 'destroyWithPictures']);
+        Route::delete('/{id}/movePictureTo/{anotherAlbumId}', [AlbumController::class, 'destroyAndMovePictures']);
+    });
+
 });

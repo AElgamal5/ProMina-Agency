@@ -22,7 +22,6 @@ class AlbumController extends Controller
     {
         return response()->json([
             'message' => 'Getting all Albums successfully',
-            'status' => 'success',
             'data' => $this->AlbumService->index($request->all())
         ], Response::HTTP_OK);
     }
@@ -34,7 +33,6 @@ class AlbumController extends Controller
     {
         return response()->json([
             'message' => 'Album created successfully',
-            'status' => 'success',
             'data' => $this->AlbumService->store($request->all())
         ], Response::HTTP_CREATED);
     }
@@ -46,7 +44,6 @@ class AlbumController extends Controller
     {
         return response()->json([
             'message' => 'Getting Album successfully',
-            'status' => 'success',
             'data' => $this->AlbumService->show($id)
         ], Response::HTTP_OK);
     }
@@ -60,7 +57,6 @@ class AlbumController extends Controller
 
         return response()->json([
             'message' => 'Album updated successfully',
-            'status' => 'success',
             'data' => null
         ], Response::HTTP_OK);
     }
@@ -74,7 +70,6 @@ class AlbumController extends Controller
 
         return response()->json([
             'message' => 'Album deleted with picture successfully',
-            'status' => 'success',
             'data' => null
         ], Response::HTTP_OK);
     }
@@ -85,7 +80,6 @@ class AlbumController extends Controller
 
         return response()->json([
             'message' => 'Album deleted successfully',
-            'status' => 'success',
             'data' => null
         ], Response::HTTP_OK);
     }

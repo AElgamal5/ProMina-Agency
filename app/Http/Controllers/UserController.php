@@ -22,7 +22,6 @@ class UserController extends Controller
     {
         return response()->json([
             'message' => 'Getting all users successfully',
-            'status' => 'success',
             'data' => $this->userService->index($request->all())
         ], Response::HTTP_OK);
     }
@@ -34,7 +33,6 @@ class UserController extends Controller
     {
         return response()->json([
             'message' => 'User created successfully',
-            'status' => 'success',
             'data' => $this->userService->store($request->all())
         ], Response::HTTP_CREATED);
     }
@@ -46,7 +44,6 @@ class UserController extends Controller
     {
         return response()->json([
             'message' => 'Getting user successfully',
-            'status' => 'success',
             'data' => $this->userService->show($id)
         ], Response::HTTP_OK);
     }
@@ -60,7 +57,6 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'User updated successfully',
-            'status' => 'success',
             'data' => null
         ], Response::HTTP_OK);
     }
@@ -74,7 +70,6 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'User deleted successfully',
-            'status' => 'success',
             'data' => null
         ], Response::HTTP_OK);
     }
