@@ -18,7 +18,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         return response()->json([
-            'You have logged in successfully',
+            'message' => 'You have logged in successfully',
             'data' => $this->authService->login($request->email, $request->password)
         ], Response::HTTP_OK);
     }
@@ -28,7 +28,7 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
 
         return response()->json([
-            'You have logged out successfully',
+            'message' => 'You have logged out successfully',
             'data' => null
         ], Response::HTTP_OK);
     }
@@ -38,7 +38,7 @@ class AuthController extends Controller
         $this->authService->register($request->all());
 
         return response()->json([
-            'You have registered successfully',
+            'message' => 'You have registered successfully',
             'data' => null
         ], Response::HTTP_CREATED);
     }

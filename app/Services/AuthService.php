@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\User\UserResource;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AuthService
 {
@@ -15,7 +17,7 @@ class AuthService
     public function login(string $email, string $password): array
     {
         if (!Auth::attempt(['email' => $email, 'password' => $password])) {
-            throw new \Exception('Invalid credentials');
+            throw new HttpException(Response::HTTP_BAD_REQUEST, 'Invalid credentials');
         }
 
         $user = Auth::user();
